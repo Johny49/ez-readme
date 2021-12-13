@@ -11,5 +11,6 @@
     "inquirer": "^6.5.2"
   },
   "keywords": [],
-  "description": ""
+  "description": "## Table of Contents * [Description](#description) * [Screenshot](#screenshot) * [Link](#link) * [Code](#code) * [Contact](#contact) * [Technologies](#technologies) * [Project Status](#project-status)",
+  "devDependencies": {}
 }
