@@ -15,34 +15,14 @@ const questions = [
         message: 'Provide a description:',
     },
     {
-        type: 'list',
-        name: 'provideUseInstructions',
-        message: 'Do you wish to provide instructions for using the project?',
-        choices: ['yes', 'no'],
-    },
-    {
         type: 'input',
         name: 'usageInstructions',
         message: 'List your usage instructions:',
-        when: function (answers) {
-            //only show if provideInstructions is true
-            return answers.provideUseInstructions === 'yes';
-        },
-    },
-    {
-        type: 'list',
-        name: 'provideInstallInstructions',
-        message: 'Do you wish to provide instructions for installation?',
-        choices: ['yes', 'no'],
     },
     {
         type: 'input',
         name: 'installInstructions',
         message: 'Provide any steps for installation:',
-        when: function (answers) {
-            //only show if provideInstructions is true
-            return answers.provideUseInstructions === 'yes';
-        },
     },
     {
         type: 'input',
@@ -55,19 +35,9 @@ const questions = [
         message: 'What is your email address?',
     }, 
     {
-        type: 'list',
-        name: 'provideContributionInstructions',
-        message: 'Do you wish to include steps on how users can contribute?',
-        choices: ['yes', 'no'],
-    },
-    {
         type: 'input',
         name: 'contributionInstructions',
         message: 'Please provide instructions for user contribution:',
-        when: function (answers) {
-            //only show if provideInstructions is true
-            return answers.provideContributionInstructions === 'yes';
-        },
     },
     {
         type: 'input',
@@ -86,19 +56,9 @@ const questions = [
         choices: ["Apache", "BSD", "GPL", "MIT"],
     },
     {
-        type: 'list',
-        name: 'provideTestInfo',
-        message: 'Do you have information about tests that you wish to include?',
-        choices: ['yes', 'no'],
-    },
-    {
         type: 'input',
         name: 'testInfo',
         message: 'Provide information about tests for your project:',
-        when: function (answers) {
-            //only show if provideInstructions is true
-            return answers.provideTestInfo === 'yes';
-        },
     },
     {
         type: 'list',
@@ -110,35 +70,34 @@ const questions = [
 
 // function to write README file
 function writeToFile(fileName, data) {
-    const { title, description, provideInstallInstructions, installInstructions, provideUseInstructions, usageInstructions, provideContributionInstruction, contributionInstructions, provideTestInfo, testInfo, deployedLink, repoLink, githubUsername, email, license, projectStatus } = data;
-    badges = "";
+    // pull values from answers
+    const { title, description, installInstructions, usageInstructions, provideContributionInstruction, contributionInstructions, testInfo, deployedLink, repoLink, githubUsername, emailAddress, license, projectStatus } = data;
+
     const readmeText =    
 `# ${title}
 
-# ${badges}
-
-## Table of Contents
-* [Description](#description)
-* [Installation](#installation)
-* [Usage](#usage)   ${provideUseInstructions} ${usageInstructions}
-* [Installation](#installation)     ${provideInstallInstructions} ${installInstructions}
-* [Link](#link) 
-* [Code](#code)
-* [Contact](#contact)
-* [Questions](#questions)
-* [Contributing](#contributing) ${provideContributionInstruction}   ${contributionInstructions}
-* [License](#license)
-* [Tests](#tests)   ${provideTestInfo} ${testInfo}
-* [Project Status](#project-status)
+# ![${license} badge](${setBadgeUrl(license)})
 
 ## Description 
 ${description}
 
-## Usage ${provideUseInstructions} 
-${usageInstructions}
+## Table of Contents
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Link](#link) 
+* [Code](#code)
+* [Questions](#questions)
+* [Contributing](#contributing)
+* [License](#license)
+* [Tests](#tests)
+* [Project Status](#project-status)
 
-## Installation ${provideInstallInstructions}
+## Installation
 ${installInstructions}
+
+## Usage
+${usageInstructions}
 
 ## Link
 [${title} website](${deployedLink})
@@ -146,19 +105,17 @@ ${installInstructions}
 ## Code
 [${title} on Github](${repoLink})
 
-## Contact 
+## Questions
+Send any questions to ${emailAddress}
 Created by [${githubUsername}](https://github.com/${githubUsername}/)
 
-## Questions
-Send any questions to ${email}
-
-## Contributing ${provideContributionInstruction}
+## Contributing
 ${contributionInstructions}
 
 ## License
 ${license}
 
-## Tests ${provideTestInfo}
+## Tests
 ${testInfo}
 
 ## Project Status
@@ -168,6 +125,16 @@ The project is ${projectStatus}
 fs.writeFile(fileName, readmeText, (err) => 
 err ? console.error(err) : console.log("README.md created successfully")
 );
+}
+
+function setBadgeUrl(license) {
+    switch (license) {
+        case "Apache" : return "https://img.shields.io/badge/license-Apache-blue";
+        case "BSD": return "https://img.shields.io/badge/license-BSD-green";
+        case "GPL": return "https://img.shields.io/badge/license-GPL-blue";
+        case "MIT": return "https://img.shields.io/badge/license-MIT-green";
+        default: return "https://img.shields.io/badge/license-undefined-yellow";
+    };
 }
 
 // function to initialize app

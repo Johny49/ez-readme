@@ -3,6 +3,8 @@
 ## Table of Contents
 * [Description](#description)
 * [Screenshot](#screenshot)
+* [Installation](#installation)
+* [Usage](#usage)
 * [Link](#link)
 * [Code](#code)
 * [Contact](#contact)
@@ -15,6 +17,21 @@ This console-based application converts data entered by a user into a formatted 
 ## Screenshot
 ![Screenshot of portfolio webpage](./assets/images/readme-screenshot.png)
 
+## Installation
+Initialize npm:
+```bash
+npm init -y
+```
+Install Inquirer:
+```bash
+npm -i Inquirer
+```
+
+## Usage
+run the following command in the project directory:
+```bash
+node index.js
+```
 
 ## Link
 [Video Walkthrough](https://johny49.github.io/weather-dashboard/)
