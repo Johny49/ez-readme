@@ -26,6 +26,10 @@ Install Inquirer:
 ```bash
 npm -i inquirer
 ```
+Run EZ-README Generator:
+```bash
+node index.js
+```
 
 ## Usage
 run the following command in the project directory:
