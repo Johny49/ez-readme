@@ -142,7 +142,7 @@ function init() {
     inquirer.prompt(questions)
         .then((answers) => {
             console.log(answers)    //TODO change to write file
-            writeToFile("testREADME.md", answers)
+            writeToFile("README.md", answers)
 });
 }
 // Function call to initialize app

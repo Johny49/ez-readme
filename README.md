@@ -15,7 +15,7 @@
 This console-based application converts data entered by a user into a formatted README file.
 
 ## Screenshot
-![Screenshot of portfolio webpage](./assets/images/readme-screenshot.png)
+![Screenshot of portfolio webpage](./readme-screenshot.png)
 
 ## Installation
 Initialize npm:
@@ -24,7 +24,7 @@ npm init -y
 ```
 Install Inquirer:
 ```bash
-npm -i Inquirer
+npm -i inquirer
 ```
 
 ## Usage
