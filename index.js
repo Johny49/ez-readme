@@ -100,16 +100,82 @@ const questions = [
             return answers.provideTestInfo === 'yes';
         },
     },
+    {
+        type: 'list',
+        name: 'projectStatus',
+        message: "What is the status of your project?",
+        choices: ['concept', 'work in process', 'active', 'abandoned', 'completed'],
+    },
 ];
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) { }
+// function to write README file
+function writeToFile(fileName, data) {
+    const { title, description, provideInstallInstructions, installInstructions, provideUseInstructions, usageInstructions, provideContributionInstruction, contributionInstructions, provideTestInfo, testInfo, deployedLink, repoLink, githubUsername, email, license, projectStatus } = data;
+    badges = "";
+    const readmeText =    
+`# ${title}
 
-// TODO: Create a function to initialize app
+# ${badges}
+
+## Table of Contents
+* [Description](#description)
+* [Installation](#installation)
+* [Usage](#usage)   ${provideUseInstructions} ${usageInstructions}
+* [Installation](#installation)     ${provideInstallInstructions} ${installInstructions}
+* [Link](#link) 
+* [Code](#code)
+* [Contact](#contact)
+* [Questions](#questions)
+* [Contributing](#contributing) ${provideContributionInstruction}   ${contributionInstructions}
+* [License](#license)
+* [Tests](#tests)   ${provideTestInfo} ${testInfo}
+* [Project Status](#project-status)
+
+## Description 
+${description}
+
+## Usage ${provideUseInstructions} 
+${usageInstructions}
+
+## Installation ${provideInstallInstructions}
+${installInstructions}
+
+## Link
+[${title} website](${deployedLink})
+
+## Code
+[${title} on Github](${repoLink})
+
+## Contact 
+Created by [${githubUsername}](https://github.com/${githubUsername}/)
+
+## Questions
+Send any questions to ${email}
+
+## Contributing ${provideContributionInstruction}
+${contributionInstructions}
+
+## License
+${license}
+
+## Tests ${provideTestInfo}
+${testInfo}
+
+## Project Status
+The project is ${projectStatus}
+`
+
+fs.writeFile(fileName, readmeText, (err) => 
+err ? console.error(err) : console.log("README.md created successfully")
+);
+}
+
+// function to initialize app
 function init() {
     inquirer.prompt(questions)
         .then((answers) => {
-            console.log(answers)
+            console.log(answers)    //TODO change to write file
+            writeToFile("testREADME.md", answers)
 });
 }
 // Function call to initialize app
